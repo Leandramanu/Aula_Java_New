@@ -1,0 +1,130 @@
+public class Principal {
+    public static void main(String[] args) {
+        Pessoa pf1 = new PessoaFisica("Pessoa Fisica 1", "00011122200");
+        Pessoa pf2 = new PessoaJuridica("Pessoa Juridica 1", "00232456000055");
+       
+        pf1.mostrarInfo();
+        pf2.mostrarInfo();
+        
+        System.out.println("------------------------------------------------------");
+        
+        Pessoa pf3 = new PessoaFisica();
+        pf3.mostrarInfo();
+        
+        PessoaFisica pf4 = new PessoaFisica();
+        pf4.setNome("Pessoa Fisica 4");
+        pf4.setCpf("000.111.222-00");
+        
+        pf3 = pf4;
+        pf3.mostrarInfo();
+    }   
+}
+
+public class Pessoa {
+    private String nome;
+
+    public Pessoa(String nome) {
+        this.nome = nome;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+     public void mostrarInfo()
+    {
+        System.out.println("Nome da Pessoa: " + nome);
+    }
+}
+
+public class PessoaFisica extends Pessoa{
+    private String cpf;
+    
+    public String getCpf() 
+    {
+        return cpf;
+    }
+
+   
+    
+    public PessoaFisica()
+    {
+        super(null);
+    }
+
+   public PessoaFisica(String nome, String cpf)
+   {
+       super(nome);
+       setCpf(cpf);
+   }
+   
+   @Override
+   public void mostrarInfo()
+   {
+       System.out.println("Pessoa Fisica: " + super.getNome() + " CPF: " + this.getCpf());
+   }
+     
+    public void setCpf(String cpf)
+    {
+        //validacao apenas de tamanho
+        //com mascara: 14 caracteres ou sem mascara: 11 caracteres
+        if(cpf.trim().length() == 14 || cpf.trim().length() == 11)
+        {
+            this.cpf = cpf;
+        }
+        else
+        {
+            System.out.println("CPF Invalido");
+        }
+    }
+}
+
+public class PessoaJuridica extends Pessoa{
+    private String cnpj;
+
+    public String getCnpj() {
+        return cnpj;
+    }
+
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
+    }
+
+   public PessoaJuridica(){
+       super(null);
+   }
+   
+   public PessoaJuridica(String nome, String cnpj)
+   {
+       super(nome);
+       setCnpj(cnpj);
+   }
+   
+   @Override
+   public void mostrarInfo()
+   {
+       System.out.println("Pessoa Juridica: " + super.getNome() + " CNPJ: " + this.getCnpj());
+   }
+     
+    public void setCpf(String cnpj){
+        //validacao apenas de tamanho
+        //com mascara: 18 caracteres ou sem mascara: 14 caracteres
+        if(cnpj.trim().length() == 18|| cnpj.trim().length() == 14)
+        {
+            this.cnpj = cnpj;
+        }
+        else
+        {
+            System.out.println("CNPJ Invalido");
+        }
+    }
+}
+
+
+
+
+
